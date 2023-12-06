@@ -49,6 +49,8 @@ export default function RegisterForm() {
             name: Register.name,
             sex: Register.sex,
             college: Register.college,
+            level: Register.level,
+            profession: Register.profession,
         },
         mode: "onChange",
     });
