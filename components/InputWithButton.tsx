@@ -23,9 +23,14 @@ export function InputWithButton() {
         if (InputKey.length === 16) {
             let register = await submitKey(InputKey);
 
-            setRegister(register);
+            if (register.name == undefined || register.name == "") {
+                toast.error("Invalid key");
+            } else {
+                setRegister(register);
 
-            router.push("/register");
+                // FIXME: FIXME 1
+                router.push("/register");
+            }
         } else {
             toast.error("Key must be 16 characters long");
         }

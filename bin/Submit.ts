@@ -8,6 +8,7 @@ async function submitKey(key: string) {
     let registerDataJson: Record<string, string> = {};
 
     await axios
+        // FIXME:
         .get("https://cors-anywhere.herokuapp.com/" + keySite, { headers: { "X-Requested-With": "XMLHttpRequest" } })
         .then((response) => {
             data = response.data;
