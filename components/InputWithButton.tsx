@@ -2,14 +2,16 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import React, { useState } from "react";
+import { useState, useContext } from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import submitKey from "@/bin/Submit";
+import { RegisterContext } from "@/context/RegisterContext";
 
 export function InputWithButton() {
     const [InputKey, setInputKey] = useState("");
     const router = useRouter();
+    const { Register, setRegister } = useContext(RegisterContext);
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         setInputKey(e.target.value);
@@ -19,8 +21,9 @@ export function InputWithButton() {
         e.preventDefault();
 
         if (InputKey.length === 16) {
-            // TODO:
-            submitKey(InputKey);
+            let register = await submitKey(InputKey);
+
+            setRegister(register);
 
             router.push("/register");
         } else {

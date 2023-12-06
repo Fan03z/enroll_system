@@ -1,11 +1,14 @@
 "use client";
 
+import { useContext } from "react";
+import { RegisterContext } from "@/context/RegisterContext";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "./ui/textarea";
 
 const MAX_IMAGE_SIZE = 10000000;
@@ -19,27 +22,39 @@ const registerFormSchema = z.object({
     name: z.string(),
     sex: z.string(),
     college: z.string(),
+    level: z.string(),
+    profession: z.string(),
     introduction: z.string(),
 });
 
 type registerFormValues = z.infer<typeof registerFormSchema>;
 
-// 从学信api拿数据
-const defaultValues: Partial<registerFormValues> = {
-    name: "",
-    sex: "",
-    college: "",
-    introduction: "",
-};
-
 export default function RegisterForm() {
+    const { Register, setRegister } = useContext(RegisterContext);
+
+    // FIXME: hardcode for test
+    // const Register = {
+    //     name: "张三",
+    //     sex: "男",
+    //     nationality: "汉",
+    //     college: "北京大学",
+    //     level: "本科",
+    //     profession: "计算机科学与技术",
+    // };
+
     const form = useForm<z.infer<typeof registerFormSchema>>({
         resolver: zodResolver(registerFormSchema),
-        defaultValues,
-        // mode: "onChange",
+        // 从学信网API拿数据
+        defaultValues: {
+            name: Register.name,
+            sex: Register.sex,
+            college: Register.college,
+        },
+        mode: "onChange",
     });
 
     function onSubmit(values: registerFormValues) {
+        // TODO: Send to the database
         console.log(values);
     }
 
@@ -68,8 +83,30 @@ export default function RegisterForm() {
                         <FormItem>
                             <FormLabel className="font-semibold">Name</FormLabel>
                             <FormControl>
-                                <Input className="w-1/2" placeholder="name" {...field} />
+                                <Input type="text" className="w-1/2" defaultValue={Register.name} {...field} />
                             </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    control={form.control}
+                    name="sex"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel className="font-semibold">Gender</FormLabel>
+                            <Select disabled onValueChange={field.onChange} defaultValue={Register.sex}>
+                                <FormControl>
+                                    <SelectTrigger className="w-1/6">
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                    <SelectItem value="男">男</SelectItem>
+                                    <SelectItem value="女">女</SelectItem>
+                                </SelectContent>
+                            </Select>
                             <FormMessage />
                         </FormItem>
                     )}
@@ -83,7 +120,37 @@ export default function RegisterForm() {
                         <FormItem>
                             <FormLabel className="font-semibold">College</FormLabel>
                             <FormControl>
-                                <Input className="w-1/2" placeholder="Educated at" {...field} />
+                                <Input className="w-1/2" defaultValue={Register.college} {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    disabled
+                    control={form.control}
+                    name="level"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel className="font-semibold">Level</FormLabel>
+                            <FormControl>
+                                <Input className="w-1/2" defaultValue={Register.level} {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    disabled
+                    control={form.control}
+                    name="profession"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel className="font-semibold">Profession</FormLabel>
+                            <FormControl>
+                                <Input className="w-1/2" defaultValue={Register.profession} {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
