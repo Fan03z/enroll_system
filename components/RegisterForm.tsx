@@ -42,18 +42,18 @@ function getImageData(event: ChangeEvent<HTMLInputElement>) {
 }
 
 export default function RegisterForm() {
-    // const { Register, setRegister } = useContext(RegisterContext);
+    const { Register, setRegister } = useContext(RegisterContext);
     const [preview, setPreview] = useState("");
 
     // FIXME: hardcode for test
-    const Register = {
-        name: "张三",
-        sex: "男",
-        nationality: "汉",
-        college: "北京大学",
-        level: "本科",
-        profession: "计算机科学与技术",
-    };
+    // const Register = {
+    //     name: "张三",
+    //     sex: "男",
+    //     nationality: "汉",
+    //     college: "北京大学",
+    //     level: "本科",
+    //     profession: "计算机科学与技术",
+    // };
 
     const form = useForm<z.infer<typeof registerFormSchema>>({
         resolver: zodResolver(registerFormSchema),
