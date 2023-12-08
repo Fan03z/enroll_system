@@ -7,7 +7,6 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import submitKey from "@/bin/Submit";
 import { RegisterContext } from "@/context/RegisterContext";
-import { setCookie } from "cookies-next";
 
 export function InputWithButton() {
     const [InputKey, setInputKey] = useState("");
@@ -28,9 +27,6 @@ export function InputWithButton() {
                 toast.error("Invalid key");
             } else {
                 setRegister(register);
-                // set pass cookie for middleware
-                setCookie("registerPass", "1");
-
                 router.push("/register");
             }
         } else {
