@@ -7,7 +7,6 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import submitKey from "@/bin/Submit";
 import { RegisterContext } from "@/context/RegisterContext";
-import { setCookie } from "cookies-next";
 
 export function InputWithButton() {
     const [InputKey, setInputKey] = useState("");
@@ -19,7 +18,7 @@ export function InputWithButton() {
     }
 
     async function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
-        e.preventDefault()
+        e.preventDefault();
 
         if (InputKey.length === 16) {
             let register = await submitKey(InputKey);
