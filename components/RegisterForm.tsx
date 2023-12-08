@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import { useContext, useState, ChangeEvent } from "react";
 import { RegisterContext } from "@/context/RegisterContext";
 import * as z from "zod";
@@ -25,7 +26,7 @@ const registerFormSchema = z.object({
     college: z.string(),
     level: z.string(),
     profession: z.string(),
-    introduction: z.string(),
+    introduction: z.string().optional(),
 });
 
 type registerFormValues = z.infer<typeof registerFormSchema>;
@@ -68,9 +69,8 @@ export default function RegisterForm() {
         mode: "onSubmit",
     });
 
-    function onSubmit(values: registerFormValues) {
-        // TODO: Send to the database
-        console.log(values);
+    async function onSubmit(values: registerFormValues) {
+        await axios.post("/api/register", { ...values });
     }
 
     return (

@@ -5,10 +5,17 @@
 > 要求
 >
 > **node** >= v20.10.0
+>
+> **docker**
 
 ```zsh
 # 安装依赖库
 npm install
+
+# 本地配置 mongodb,具体查看.env.example
+docker pull mongo
+docker pull prismagraphql/mongo-single-replica:5.0.3
+docker run --name enroll_system  -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME="admin" -e MONGO_INITDB_ROOT_PASSWORD="123456" -d prismagraphql/mongo-single-replica:5.0.3
 
 # 3000端口运行启动
 npm run dev
@@ -21,6 +28,10 @@ npm run dev
 > tailwind css
 >
 > shadcn ui
+>
+> prisma
+>
+> mongodb
 
 **FIXME**
 
@@ -32,4 +43,4 @@ npm run dev
 **TODO**
 
 -   [ ] 试试前端实现微信扫码登录
--   [ ] 表单提交后,发送表单到数据库
+-   [x] 表单提交后,发送表单信息到数据库
