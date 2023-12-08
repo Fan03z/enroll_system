@@ -19,7 +19,7 @@ export function InputWithButton() {
     }
 
     async function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
-        e.preventDefault();
+        e.preventDefault()
 
         if (InputKey.length === 16) {
             let register = await submitKey(InputKey);
@@ -28,9 +28,6 @@ export function InputWithButton() {
                 toast.error("Invalid key");
             } else {
                 setRegister(register);
-                // set pass cookie for middleware
-                setCookie("registerPass", "1");
-
                 router.push("/register");
             }
         } else {
