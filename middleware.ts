@@ -8,7 +8,8 @@ export function middleware(request: NextRequest) {
         request.cookies.delete("registerPass");
 
         const nextResponse = NextResponse.next();
-        nextResponse.cookies.delete("registerPass");
+        // FIXME: 注释掉下面这行才能工作
+        // nextResponse.cookies.delete("registerPass");
 
         return nextResponse;
     }
@@ -18,6 +19,5 @@ export function middleware(request: NextRequest) {
 
     return homeResponse;
 }
-7;
 
 export const config = { matcher: ["/register"] };

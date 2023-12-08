@@ -25,6 +25,7 @@ npm run dev
 **FIXME**
 
 -   [x] 通过更改路由地址,可以直接跳过验证去填表单 [问题位置](./components/InputWithButton.tsx)
+-   [ ] middleware 无法删除 cookie [问题位置](./middleware.ts)
 -   [ ] Form Image 输入得做文件格式识别 [问题位置](./components/RegisterForm.tsx)
 -   [ ] 发送 Get 请求会发生 cors 跨域请求错误,目前暂时的处理办法是通过 cors-anywhere 处理,但这个处理先不急,看看如果能用微信扫码验证登录之后会怎么样 [问题位置](./bin/Submit.ts)
 
