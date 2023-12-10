@@ -1,5 +1,6 @@
 "use client";
 
+import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState, useContext } from "react";
@@ -10,6 +11,7 @@ import { RegisterContext } from "@/context/RegisterContext";
 
 export function InputWithButton() {
     const [InputKey, setInputKey] = useState("");
+    const [IsSubmit, setIsSubmit] = useState(false);
     const router = useRouter();
     const { Register, setRegister } = useContext(RegisterContext);
 
@@ -21,10 +23,13 @@ export function InputWithButton() {
         e.preventDefault();
 
         if (InputKey.length === 16) {
+            setIsSubmit(true);
+
             let register = await submitKey(InputKey);
 
             if (register.name == undefined || register.name == "") {
                 toast.error("Invalid key");
+                setIsSubmit(false);
             } else {
                 setRegister(register);
                 router.push("/register");
@@ -37,9 +42,16 @@ export function InputWithButton() {
     return (
         <div className="flex w-full max-w-lg items-center space-x-2">
             <Input type="type" placeholder="Key" value={InputKey} onChange={handleChange} className="w-fix" />
-            <Button type="submit" onClick={handleSubmit}>
-                Submit
-            </Button>
+            {IsSubmit ? (
+                <Button disabled>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Sumiting
+                </Button>
+            ) : (
+                <Button type="submit" onClick={handleSubmit}>
+                    Submit
+                </Button>
+            )}
         </div>
     );
 }

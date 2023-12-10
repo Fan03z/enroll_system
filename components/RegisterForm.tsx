@@ -11,7 +11,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Textarea } from "./ui/textarea";
+import { Textarea } from "@/components/ui/textarea";
+import { Loader2 } from "lucide-react";
+import toast from "react-hot-toast";
 
 const MAX_IMAGE_SIZE = 15000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -43,6 +45,7 @@ function getImageData(event: ChangeEvent<HTMLInputElement>) {
 }
 
 export default function RegisterForm() {
+    const [IsSubmit, setIsSubmit] = useState(false);
     const { Register, setRegister } = useContext(RegisterContext);
     const [preview, setPreview] = useState("");
 
@@ -70,7 +73,17 @@ export default function RegisterForm() {
     });
 
     async function onSubmit(values: registerFormValues) {
-        await axios.post("/api/register", { ...values });
+        setIsSubmit(true);
+
+        await axios.post("/api/register", { ...values }).then((res) => {
+            if (res.status === 200) {
+                toast.success("Submit success");
+            } else {
+                toast.error("Failed to submit,Some errors happend");
+            }
+        });
+
+        setIsSubmit(false);
     }
 
     return (
@@ -198,7 +211,14 @@ export default function RegisterForm() {
                     )}
                 />
 
-                <Button type="submit">Submit</Button>
+                {IsSubmit ? (
+                    <Button disabled>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Sumiting
+                    </Button>
+                ) : (
+                    <Button type="submit">Submit</Button>
+                )}
             </form>
         </Form>
     );
