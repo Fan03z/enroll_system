@@ -6,6 +6,8 @@
 >
 > **node** >= v20.10.0
 >
+> **ssl**
+>
 > **docker**
 
 ```zsh
@@ -16,6 +18,9 @@ npm install
 docker pull mongo
 docker pull prismagraphql/mongo-single-replica:5.0.3
 docker run --name enroll_system  -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME="admin" -e MONGO_INITDB_ROOT_PASSWORD="123456" -d prismagraphql/mongo-single-replica:5.0.3
+
+# 更新prisma(每次更改schema.prisma后都要更新)
+npx prisma generate
 
 # 3000端口运行启动
 npm run dev
