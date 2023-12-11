@@ -44,6 +44,7 @@ npm run dev
 -   [x] middleware 无法删除 cookie [问题位置](./middleware.ts)
 -   [ ] Form Image 输入得做文件格式识别 [问题位置](./components/RegisterForm.tsx)
 -   [ ] 发送 Get 请求会发生 cors 跨域请求错误,目前暂时的处理办法是通过 cors-anywhere 处理,但这个处理先不急,看看如果能用微信扫码验证登录之后会怎么样 [问题位置](./bin/Submit.ts)
+-   [ ] 用 axios 发送 GET 请求会报错,无法加载页面,目前用的 fetch() 顶替 [问题位置](./app/admin/page.tsx)
 
 **TODO**
 
@@ -51,4 +52,4 @@ npm run dev
 -   [x] 表单提交后,发送表单信息到数据库
 -   [x] 添加管理员页面，可以查看所有提交表单，并且能判断是否通过
 -   [ ] 设置管理员的登录条件,以及添加进 middleware 控制范围
--   [ ] 管理员界面内容从数据库 api 取
+-   [x] 管理员界面内容从数据库 api 取
