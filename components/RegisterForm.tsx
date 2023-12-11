@@ -24,6 +24,7 @@ const registerFormSchema = z.object({
     // .refine((file) => file?.size <= MAX_IMAGE_SIZE, `Max image size is 15MB.`)
     // .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), "Only .jpg, .jpeg, .png and .webp formats are supported."),
     name: z.string(),
+    age: z.coerce.number().gte(18, "Must be 18 and above"),
     sex: z.string(),
     college: z.string(),
     level: z.string(),
@@ -52,6 +53,7 @@ export default function RegisterForm() {
     // FIXME: hardcode for test
     // const Register = {
     //     name: "张三",
+    //     age: 20,
     //     sex: "男",
     //     nationality: "汉",
     //     college: "北京大学",
@@ -127,6 +129,20 @@ export default function RegisterForm() {
                             <FormLabel className="font-semibold">Name</FormLabel>
                             <FormControl>
                                 <Input type="text" className="w-1/2" disabled value={Register.name} {...rest} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    control={form.control}
+                    name="age"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel className="font-semibold">Age</FormLabel>
+                            <FormControl>
+                                <Input type="number" className="w-1/6" defaultValue={18} {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

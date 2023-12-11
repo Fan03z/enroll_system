@@ -5,16 +5,18 @@ import client from "@/lib/prisma";
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const { name, sex, college, level, profession, introduction } = body;
+        const { name, age, sex, college, level, profession, introduction } = body;
 
         const register = await client.register.create({
             data: {
                 name,
+                age,
                 sex,
                 college,
                 level,
                 profession,
                 introduction,
+                status: "pending",
             },
         });
 
