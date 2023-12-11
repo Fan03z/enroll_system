@@ -36,7 +36,7 @@ npm run dev
 **FIXME**
 
 -   [x] 通过更改路由地址,可以直接跳过验证去填表单 [问题位置](./components/InputWithButton.tsx)
--   [ ] middleware 无法删除 cookie [问题位置](./middleware.ts)
+-   [x] middleware 无法删除 cookie [问题位置](./middleware.ts)
 -   [ ] Form Image 输入得做文件格式识别 [问题位置](./components/RegisterForm.tsx)
 -   [ ] 发送 Get 请求会发生 cors 跨域请求错误,目前暂时的处理办法是通过 cors-anywhere 处理,但这个处理先不急,看看如果能用微信扫码验证登录之后会怎么样 [问题位置](./bin/Submit.ts)
 
@@ -44,4 +44,6 @@ npm run dev
 
 -   [ ] 试试前端实现微信扫码登录
 -   [x] 表单提交后,发送表单信息到数据库
--   [ ] 添加管理员页面，可以查看所有提交表单，并且能判断是否通过
+-   [x] 添加管理员页面，可以查看所有提交表单，并且能判断是否通过
+-   [ ] 设置管理员的登录条件,以及添加进 middleware 控制范围
+-   [ ] 管理员界面内容从数据库 api 取
