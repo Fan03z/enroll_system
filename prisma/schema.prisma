@@ -21,3 +21,9 @@ model Register {
   introduction String?
   status       String
 }
+
+model Admin {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  key   String
+  owner String
+}

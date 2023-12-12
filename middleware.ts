@@ -16,4 +16,4 @@ export function middleware(request: NextRequest) {
     return homeResponse;
 }
 
-export const config = { matcher: ["/register"] };
+export const config = { matcher: ["/register", "/admin/:path*"] };

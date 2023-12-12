@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import submitKey from "@/bin/Submit";
 import { RegisterContext } from "@/context/RegisterContext";
+import axios from "axios";
 
 export function InputWithButton() {
     const [InputKey, setInputKey] = useState("");
@@ -22,20 +23,35 @@ export function InputWithButton() {
     async function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
 
-        if (InputKey.length === 16) {
-            setIsSubmit(true);
+        let IsAdmin: boolean = false;
 
-            let register = await submitKey(InputKey);
-
-            if (register.name == undefined || register.name == "") {
-                toast.error("Invalid key");
-                setIsSubmit(false);
-            } else {
-                setRegister(register);
-                router.push("/register");
+        await axios.get("/api/validate").then((res) => {
+            let i = 0;
+            while (res.data[i] != undefined) {
+                if (res.data[i].key == InputKey) {
+                    IsAdmin = true;
+                    router.push("/admin");
+                }
+                i++;
             }
-        } else {
-            toast.error("Key must be 16 characters long");
+        });
+
+        if (!IsAdmin) {
+            if (InputKey.length === 16) {
+                setIsSubmit(true);
+
+                let register = await submitKey(InputKey);
+
+                if (register.name == undefined || register.name == "") {
+                    toast.error("Invalid key");
+                    setIsSubmit(false);
+                } else {
+                    setRegister(register);
+                    router.push("/register");
+                }
+            } else {
+                toast.error("Key must be 16 characters long");
+            }
         }
     }
 
