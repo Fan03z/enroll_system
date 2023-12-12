@@ -12,6 +12,7 @@ async function getData(): Promise<Register[]> {
     //     })
     //     .then((res) => console.log(res.data));
 
+    // FIXME: 数据库内容更新后,这里不会更新
     const response = await fetch("http://localhost:3000/api/admin", {
         method: "GET",
         headers: {
