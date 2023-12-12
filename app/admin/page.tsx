@@ -1,23 +1,22 @@
 import { DataTable } from "@/components/DataTable";
 import { Register, columns } from "@/components/DataTableColumns";
-// import axios from "axios";
+import axios from "axios";
 
 async function getData(): Promise<Register[]> {
     // FIXME: axios库会报错
-    // await axios
-    //     .get("/api/admin", {
-    //         headers: {
-    //             Accept: "application/json",
-    //         },
-    //     })
-    //     .then((res) => console.log(res.data));
+    // const response = await axios.get("/api/admin", {
+    //     headers: {
+    //         Accept: "application/json",
+    //     },
+    // });
+    // const responseData = response.data;
 
-    // FIXME: 数据库内容更新后,这里不会更新
     const response = await fetch("http://localhost:3000/api/admin", {
         method: "GET",
         headers: {
             Accept: "application/json",
         },
+        next: { revalidate: 10 },
     });
 
     const responseData = await response.json();

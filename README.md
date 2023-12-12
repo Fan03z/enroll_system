@@ -45,7 +45,7 @@ npm run dev
 -   [ ] Form Image 输入得做文件格式识别 [问题位置](./components/RegisterForm.tsx)
 -   [ ] 发送 Get 请求会发生 cors 跨域请求错误,目前暂时的处理办法是通过 cors-anywhere 处理,但这个处理先不急,看看如果能用微信扫码验证登录之后会怎么样 [问题位置](./bin/Submit.ts)
 -   [ ] 用 axios 发送 GET 请求会报错,无法加载页面,目前用的 fetch() 顶替 [问题位置](./app/admin/page.tsx)
--   [ ] 数据库内容更新后,admin page 不会更新 [问题位置](./app/admin/page.tsx)
+-   [x] 数据库内容更新后,admin page 不会更新 [问题位置](./app/admin/page.tsx)
 
 **TODO**
 
