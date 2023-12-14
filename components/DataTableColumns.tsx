@@ -5,6 +5,8 @@ import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Checkbox } from "@/components/ui/checkbox";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export type Register = {
     id: string;
@@ -123,10 +125,36 @@ export const columns: ColumnDef<Register>[] = [
                     <DropdownMenuContent align="start">
                         <DropdownMenuItem
                             onClick={() => {
+                                axios.post("/api/update/pass", row.original).then((res) => {
+                                    if (res.status === 200) {
+                                        toast.success("Success to pass");
+                                    } else {
+                                        toast.error("Failed to pass");
+                                    }
+                                });
+                            }}
+                        >
+                            Pass
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                            onClick={() => {
+                                axios.post("/api/update/reject", row.original).then((res) => {
+                                    if (res.status === 200) {
+                                        toast.success("Success to reject");
+                                    } else {
+                                        toast.error("Failed to pass");
+                                    }
+                                });
+                            }}
+                        >
+                            Reject
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                            onClick={() => {
                                 // FIXME: 这里跳转查看具体的信息路由
                             }}
                         >
-                            View information details
+                            View details
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
