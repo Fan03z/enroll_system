@@ -3,7 +3,8 @@ import { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
     // match the referer
-    if (request.headers.get("referer") == "http://localhost:3000/") {
+    const referer = request.headers.get("referer");
+    if (referer == "http://localhost:3000/" || referer == "http://localhost:3000/admin") {
         const nextResponse = NextResponse.next();
         return nextResponse;
     }

@@ -16,7 +16,7 @@ async function getData(): Promise<Register[]> {
         headers: {
             Accept: "application/json",
         },
-        next: { revalidate: 10 },
+        next: { revalidate: 0 },
     });
 
     const responseData = await response.json();

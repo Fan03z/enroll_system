@@ -128,6 +128,7 @@ export const columns: ColumnDef<Register>[] = [
                                 axios.post("/api/update/pass", row.original).then((res) => {
                                     if (res.status === 200) {
                                         toast.success("Success to pass");
+                                        location.reload();
                                     } else {
                                         toast.error("Failed to pass");
                                     }
@@ -141,6 +142,7 @@ export const columns: ColumnDef<Register>[] = [
                                 axios.post("/api/update/reject", row.original).then((res) => {
                                     if (res.status === 200) {
                                         toast.success("Success to reject");
+                                        location.reload();
                                     } else {
                                         toast.error("Failed to pass");
                                     }
